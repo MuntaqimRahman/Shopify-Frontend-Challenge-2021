@@ -1,13 +1,19 @@
 import { createContext } from "react";
 
+export interface NominationObject {
+    Title: string,
+    Year: string,
+    Poster: string
+}
+
 export interface INominationStates {
-    nominations: any,
+    nominations: NominationObject[] | null,
     setNominations: (nominations: any) => void
 }
 
 const NominationContext = createContext<INominationStates>({
     nominations: [],
-    setNominations: (nominations: any) => {}
+    setNominations: (nominations: NominationObject[]) => {}
 })
 
 export const NominationContextConsumer = NominationContext.Consumer;

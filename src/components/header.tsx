@@ -1,10 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import TextField from "@material-ui/core/TextField";
 import SearchContext from "../contexts/search";
 
 const Header = () => {
   const { searchQuery, setSearchQuery } = useContext(SearchContext);
+
+  const [searchQueryState, setSearchQueryState] = useState(searchQuery);
 
   const HeaderContainer = styled.div`
     display: flex;
@@ -30,12 +32,23 @@ const Header = () => {
     }
   `;
 
+  const handleSearchChange = (newSearch: string) => {
+    setSearchQueryState(newSearch);
+
+    if(newSearch === searchQuery){
+      return;
+    }
+
+    setSearchQuery(newSearch);
+  }
+
   return (
     <HeaderContainer>
       <TextField
+      style={{width: "80%", backgroundColor: "white"}}
         autoFocus
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
+        value={searchQueryState}
+        onChange={(e) => {handleSearchChange(e.target.value)}}
         variant="outlined"
       ></TextField>
     </HeaderContainer>

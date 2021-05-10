@@ -1,25 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import useLocalStorage from "./hooks/useLocalStorage";
+
+import Homepage from "./pages/Homepage";
+
+import {SearchContextProvider} from "./contexts/search";
+import {NominationContextProvider} from "./contexts/nomination";
 
 function App() {
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [nominations,setNominations, isComponentMounted] = useLocalStorage("nominations",[]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    !isComponentMounted ? <div></div> :
+
+    <>
+      <SearchContextProvider value ={{searchQuery,setSearchQuery}}>
+        <NominationContextProvider value={{nominations,setNominations}}>
+        <Homepage/>
+
+        </NominationContextProvider>
+      </SearchContextProvider>
+    </>
   );
 }
 

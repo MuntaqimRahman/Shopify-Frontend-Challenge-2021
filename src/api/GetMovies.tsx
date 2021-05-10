@@ -1,5 +1,5 @@
 export const GetMovieTitles = async (searchQuery: string) => {
-    const response = await fetch(`http://www.omdbapi.com/?s=${searchQuery}&type=movie&apikey=be83d040`);
+    const response = await fetch(`https://www.omdbapi.com/?s=${searchQuery}&type=movie&apikey=be83d040`);
 
     const post = await APIParser(response);
 
@@ -7,7 +7,7 @@ export const GetMovieTitles = async (searchQuery: string) => {
 }
 
 export const GetMovieByTitle = async (title: string) => {
-    const response = await fetch(`http://www.omdbapi.com/?t=${title}&plot=full&apikey=be83d040`);
+    const response = await fetch(`https://www.omdbapi.com/?t=${title}&plot=full&apikey=be83d040`);
 
     const post = await APIParser(response);
 
